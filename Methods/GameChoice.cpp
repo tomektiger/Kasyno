@@ -7,6 +7,11 @@ short ChooseGame() {
     do {
         cout <<"Which game do you choose? (1-3): ";
         cin >> choosedGame;
+        if(choosedGame == 0)
+        {
+            break;
+        }
+
         if (cin.fail()) {
             cout <<"Please provide a correct number"<<endl;
             cin.clear();

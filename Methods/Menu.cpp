@@ -63,11 +63,10 @@ cout<<"╚════╝╚════╝╚════╝╚════╝�
 
 }
 
-void PrintWelcome(string name)
+void PrintWelcome(string name, double startMoney)
 {
     PrintDecoration();
     cout << "Hello "<< name << ", welcome to my Casino" << endl;
-    double startMoney = 10000;
     cout << "YOU GOT A BONUS FROM ME: " << startMoney << "$ IS ALL YOURS :)" << endl;
     cout<<""<<endl;
     PrintDecoration();
@@ -80,6 +79,7 @@ void PrintAvailableGames(){
     cout << "1. BLACKJACK" << endl;
     cout << "2. RULETKA" << endl;
     cout << "3. JEDNOREKI BANDYTA" << endl;
+    cout << "0. TO EXIT GAME"<<endl;
 }
 
 void PrintLetsPlayAndGorilla() {
