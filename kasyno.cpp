@@ -6,6 +6,9 @@
 #include "Methods/AdditionalMethods.cpp"
 #include <ctime>
 #include <conio.h>
+#include <windows.h>
+#include <mmsystem.h>
+#pragma comment(lib, "winmm.lib")
 // #include "Methods/Game.cpp"
 using namespace std;
 
@@ -53,6 +56,7 @@ double playRuletka(double &money)
             
             if(choosedNumber == successNumber)
             {
+
                 isWon = true;
                 system("cls");
                 PrintWonText();
@@ -69,6 +73,13 @@ double playRuletka(double &money)
             }
             else
             {
+                /*
+                Cheerful Whistling by Free Music | https://soundcloud.com/fm_freemusic
+                Music promoted by https://www.free-stock-music.com
+                Creative Commons Attribution 3.0 Unported License
+                https://creativecommons.org/licenses/by/3.0/deed.en_US
+                */
+                PlaySound("Music/funny.wav", NULL, SND_FILENAME | SND_ASYNC);
                 isWon = false;
                 money -= hajs;
                 system("cls");
@@ -90,6 +101,9 @@ double playRuletka(double &money)
                 cin >> answer;
                 if(answer=="t")
                 {
+                    system("cls");
+                    PrintTakeMyMoney();
+                    Sleep(3000);
                     successNumber = rand()%36;
                     system("cls");
                 }
@@ -110,21 +124,31 @@ double playRuletka(double &money)
             {
                 cout<<"SORRY BUT YOU HAVE NO FUNDS TO PLAY :("<<endl;
                 cout<<"Your balance is: "<<money<<endl;
+                cout<<" "<<endl;
+                PrintScream();
             }
 
         }while(answer !="n" && money>0);
     }
-    else
+    else if(money == 0)
     {
         system("cls");
         cout<<"YOU HAVE LOST ALL YOUR MONEY :("<<endl;
+        cout<<" "<<endl;
+        PrintScream();
     }
     return money;
 }
 
 int main() {
     double money = 10000;
-
+    /*
+    Antidepresseur by Patchworker f.k.a. [friendzoned] | https://soundcloud.com/patchworker
+    Music promoted by https://www.free-stock-music.com
+    Creative Commons Attribution-ShareAlike 3.0 Unported
+    https://creativecommons.org/licenses/by-sa/3.0/deed.en_US
+    */
+    PlaySound("Music/Antidepress.wav", NULL, SND_FILENAME | SND_ASYNC);
     breakLine();
     CasinoPicture();
     breakLine();
@@ -139,10 +163,20 @@ int main() {
 
     string player = CreatePlayer();
     system("cls");
+    PlaySound(NULL, NULL, SND_ASYNC);
+
+    PlaySound("Music/cyber.wav", NULL, SND_FILENAME | SND_ASYNC);
 
     PrintLetsPlayAndGorilla();
+    /*
+    Cyberpunk Gaming Electro | STARDUST by Alex-Productions | https://www.youtube.com/channel/UCx0_M61F81Nfb-BRXE-SeVA
+    Music promoted by https://www.free-stock-music.com
+    Creative Commons Attribution 3.0 Unported License
+    https://creativecommons.org/licenses/by/3.0/deed.en_US
+    */
     breakLine();
     PrintWelcome(player,money);
+
     cout<<"PRESS ENTER TO SHOW GAMES......"<<endl;
     getch();
     system("cls");
