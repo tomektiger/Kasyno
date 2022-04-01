@@ -6,6 +6,7 @@
 using namespace std;
 
 short ChooseGame() {
+    PlaySound("Music/menugier.wav", NULL, SND_FILENAME | SND_ASYNC);
     short choosedGame = 0;
     /*
     Pixel Story by Roa Music | https://soundcloud.com/roa_music1031
@@ -14,7 +15,7 @@ short ChooseGame() {
     https://creativecommons.org/licenses/by/3.0/deed.en_US    
     */
 
-    PlaySound("Music/pixel.wav", NULL, SND_FILENAME | SND_ASYNC);
+    //PlaySound("Music/action.wav", NULL, SND_FILENAME | SND_ASYNC);
     do {
         cout <<"Which game do you choose? (1-3): ";
         cin >> choosedGame;
