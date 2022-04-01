@@ -12,6 +12,113 @@
 // #include "Methods/Game.cpp"
 using namespace std;
 
+
+double PlayJednorekiBandyta(double &money){
+    system("cls");
+    printTextBandyta();
+    cout<<""<<endl;
+    PrintLines();
+
+    double userBet;
+    bool isWin = false;
+    string answer;
+    int randomNumber1 = rand()%4+1;//1-4
+    int randomNumber2 = rand()%4+1;//1-4
+    int randomNumber3 = rand()%4+1;//1-4
+
+    do{
+        cout<<"How much do you want to bet ?: ";
+        cin>> userBet;
+
+        if(userBet<money)
+        {
+            if(money>0)
+            {
+                system("cls");
+                printMoney();
+                cout<<" "<<endl;
+                cout<<" "<<endl;
+                cout<<"PRESS ENTER TO PULL THE TRIGGER ! :) ";
+                getch();
+
+                MachineRolling();
+                
+                if(randomNumber1==randomNumber2&&randomNumber2==randomNumber3)
+                {
+                    isWin = true;
+                    system("cls");
+                    PrintWonText();
+                    cout<<" "<<endl;
+                    cout<<"Machine rolled: "<<randomNumber1<<", "<<randomNumber2<<", "<<randomNumber3<<endl;
+                    cout<<"You won !!! :D"<<endl;
+                    cout<<userBet<<"$ HAS BEEN ADDED TO YOUR ACCOUNT BALANCE"<<endl;
+                    cout<<""<<endl;
+                    money += userBet;
+                    PrintWinImage();
+                    cout<<""<<endl;
+                    PrintLines();
+                }
+
+                else
+                {
+                    PlaySound("Music/funny.wav", NULL, SND_FILENAME | SND_ASYNC);
+                    isWin = false;
+                    money -= userBet;
+                    system("cls");
+                    PrintLostText();
+                    cout<<" "<<endl;
+                    cout<<"You have lost "<<userBet<<"$ :("<<endl;
+                    cout<<"Machine rolled: "<<randomNumber1<<", "<<randomNumber2<<", "<<randomNumber3<<endl;
+                    cout<<""<<endl;
+                    PrintLostImage();
+                    cout<<""<<endl;
+                    PrintLines();
+                }
+                cout<<"Your balance is "<<money<<"$"<<endl;
+                if(money>0)
+                {
+                    cout<<"Do you want to play again ? t/n: ";
+                    cin >> answer;
+                    if(answer=="t")
+                    {
+                        system("cls");
+                        PrintTakeMyMoney();
+                        Sleep(3000);
+                        randomNumber1 = rand()%4+1;//1-4
+                        randomNumber2 = rand()%4+1;//1-4
+                        randomNumber3 = rand()%4+1;//1-4
+                        system("cls");
+                    }
+                    else
+                    {
+                        system("cls");
+                        PrintAvailableGames(money);
+                        short choosedGame = ChooseGame();
+                        if (choosedGame == 1) {
+                        }else if (choosedGame == 2) {
+                            // money = playRuletka(money);
+                        } else if (choosedGame == 3) {
+                            money = PlayJednorekiBandyta(money);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                cout<<"SORRY BUT YOU HAVE NO FUNDS TO PLAY :("<<endl;
+                cout<<"Your balance is: "<<money<<endl;
+                cout<<" "<<endl;
+                PrintScream();
+            }    
+        }
+        else
+        {
+            cout<<"You dont have that much money ;/"<<endl;
+        }
+    }while(answer !="n" && money>0);
+  return money;
+}
+
 double playRuletka(double &money)
 {
      //random number from 1 to 4, simulation of rotating
@@ -110,13 +217,13 @@ double playRuletka(double &money)
                 else
                 {
                     system("cls");
-                    PrintAvailableGames();
+                    PrintAvailableGames(money);
                     short choosedGame = ChooseGame();
                     if (choosedGame == 1) {
                     } else if (choosedGame == 2) {
                         money = playRuletka(money);
                     } else if (choosedGame == 3) {
-                        //playThirdGame
+                        money = PlayJednorekiBandyta(money);
                     }
                 }
             }
@@ -180,7 +287,7 @@ int main() {
     cout<<"PRESS ENTER TO SHOW GAMES......"<<endl;
     getch();
     system("cls");
-    PrintAvailableGames();
+    PrintAvailableGames(money);
 
     short choosedGame = ChooseGame();
 
@@ -188,6 +295,6 @@ int main() {
     } else if (choosedGame == 2) {
         money = playRuletka(money);
     } else if (choosedGame == 3) {
-        //playThirdGame
+        money = PlayJednorekiBandyta(money);
     }
 }
