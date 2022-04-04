@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Methods/Menu.cpp"
-#include "Methods/GameChoice.cpp"
 #include "Methods/PlayerCreation.cpp"
 #include "Methods/TextPictures.cpp"
 #include "Games/Bandyta/BandytaMethods.cpp"
@@ -102,14 +101,7 @@ double PlayJednorekiBandyta(double &money){
                 else
                 {
                     system("cls");
-                    PrintAvailableGames(money);
-                    short choosedGame = ChooseGame();
-                    if (choosedGame == 1) {
-                    }else if (choosedGame == 2) {
-                        // money = playRuletka(money);
-                    } else if (choosedGame == 3) {
-                        money = PlayJednorekiBandyta(money);
-                    }
+                    break;
                 }
             }else
             {
@@ -223,14 +215,7 @@ double playRuletka(double &money)
                 else
                 {
                     system("cls");
-                    PrintAvailableGames(money);
-                    short choosedGame = ChooseGame();
-                    if (choosedGame == 1) {
-                    } else if (choosedGame == 2) {
-                        money = playRuletka(money);
-                    } else if (choosedGame == 3) {
-                        money = PlayJednorekiBandyta(money);
-                    }
+                    break;
                 }
             }
             else
@@ -425,18 +410,7 @@ double playBlackjack(double &money)
                 else
                 {
                     system("cls");
-                    PrintAvailableGames(money);
-                    short choosedGame = ChooseGame();
-                    if (choosedGame == 1) 
-                    {
-                        money = playBlackjack(money);
-                    } else if (choosedGame == 2) 
-                    {
-                        money = playRuletka(money);
-                    } else if (choosedGame == 3) 
-                    {
-                        money = PlayJednorekiBandyta(money);
-                    }
+                    break;    
                 }
             }   
             else
@@ -455,6 +429,50 @@ double playBlackjack(double &money)
         PrintScream();
     }
 return money;
+}
+
+void GameChoice(double money){
+    short choosedGame = 0;
+    /*
+    Pixel Story by Roa Music | https://soundcloud.com/roa_music1031
+    Music promoted by https://www.free-stock-music.com
+    Creative Commons Attribution 3.0 Unported License
+    https://creativecommons.org/licenses/by/3.0/deed.en_US    
+    */
+
+    //PlaySound("Music/action.wav", NULL, SND_FILENAME | SND_ASYNC);
+    do{
+        do 
+        {
+            PrintAvailableGames(money);
+            cout <<"Which game do you choose? (1-3): ";
+            cin >> choosedGame;
+            if(choosedGame == 0)
+            {
+                break;
+            }
+
+            if (cin.fail()) 
+            {
+                cout <<"Please provide a correct number"<<endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            }
+        }while (choosedGame > 3 || choosedGame < 1);
+            
+        if (choosedGame == 1) 
+        {
+            money = playBlackjack(money);
+        } 
+        else if (choosedGame == 2) 
+        {
+            money = playRuletka(money);
+        } 
+        else if (choosedGame == 3) 
+        {
+            money = PlayJednorekiBandyta(money);
+        }
+    }while(choosedGame!=0);
 }
 
 int main() {
@@ -485,15 +503,6 @@ int main() {
     cout<<"PRESS ENTER TO SHOW GAMES......"<<endl;
     getch();
     system("cls");
-    PrintAvailableGames(money);
-
-    short choosedGame = ChooseGame();
-
-    if (choosedGame == 1) {
-        money = playBlackjack(money);
-    } else if (choosedGame == 2) {
-        money = playRuletka(money);
-    } else if (choosedGame == 3) {
-        money = PlayJednorekiBandyta(money);
-    }
+    GameChoice(money);
 }
+
