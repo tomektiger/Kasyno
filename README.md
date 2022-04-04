@@ -7,5 +7,6 @@
         <p><a href  = "https://www.nerdfonts.com/font-downloads">Download font</a></p>
         <li>Set the Meslo Nerd Font as default Powershell font in the Windows Terminal</li>
         <img src ="NerdFontScreen.png">
-        <li>Run the file by "./"filename</li>
+        <li>Compile the game by running "g++ kasyno.cpp -lwinmm"
+        <li>Run the file by "./a"</li>
     </ol>
