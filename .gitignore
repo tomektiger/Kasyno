@@ -136,6 +136,8 @@ fabric.properties
 .idea/**/markdown-navigator.xml
 .idea/**/markdown-navigator-enh.xml
 .idea/**/markdown-navigator/
+.idea/*
+.vscode/*
 
 # Cache file creation bug
 # See https://youtrack.jetbrains.com/issue/JBR-2257
