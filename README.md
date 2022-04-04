@@ -1,4 +1,7 @@
  <h1>How to properly run the game: </h1>
+ 
+ <h2>There are few steps to do before launching the game. You have to do this to properly see everything</h2>
+ <br>
     <ol>
         <li>Download the repository</li>
         <li>Install Windows Terminal from this link: </li>
