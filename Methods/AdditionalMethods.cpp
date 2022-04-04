@@ -19,7 +19,6 @@ void breakLine(){
     cout<<" "<<endl;
 }
 
-
 void printBall(){
 cout<<" ▄▄▄▄"<<endl;
 cout<<"█─▄▄─█"<<endl;

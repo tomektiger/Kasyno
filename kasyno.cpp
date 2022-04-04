@@ -3,6 +3,7 @@
 #include "Methods/GameChoice.cpp"
 #include "Methods/PlayerCreation.cpp"
 #include "Methods/TextPictures.cpp"
+#include "Methods/BandytaMethods.cpp"
 #include "Methods/AdditionalMethods.cpp"
 #include <ctime>
 #include <conio.h>
@@ -10,7 +11,6 @@
 #include <mmsystem.h>
 #pragma comment(lib, "winmm.lib")
 using namespace std;
-
 
 double PlayJednorekiBandyta(double &money){
     PlaySound("Music/jednoreki.wav", NULL, SND_FILENAME | SND_ASYNC);
@@ -250,6 +250,211 @@ double playRuletka(double &money)
     return money;
 }
 
+double playBlackjack(double &money)
+{
+    PlaySound("Music/blackjack.wav", NULL, SND_FILENAME | SND_ASYNC);
+    PrintBlackjackText();   
+    srand((unsigned)time(0));
+    int dealer_card1 = rand() % 13 + 1; 
+	int dealer_card2 = rand() % 13 + 1;
+	int player_card1 = rand() % 13 + 1;
+	int player_card2 = rand() % 13 + 1;
+    string answer;
+    int bet;
+
+    if(money>0)
+    {
+        do
+        {
+            do
+            {
+                PrintLines();
+                cout << "\n" << "Please place your bet: ";
+                cin >> bet;
+                if(bet >money)
+                {
+                    cout<<"Bet cannot be higher than your balance !"<<endl;
+                }
+            }while(bet>money);
+
+            system("cls");
+
+            PrintDistributingCards();
+            PrintLines();
+            cout<<"PRESS ENTER TO DISTRIBUTE CARDS.........."<<endl;
+            getch();
+
+            PrintTasowanieKart();
+
+            PrintResultsText();
+            breakLine();
+
+            cout << "Dealer has: "; 
+            switch (dealer_card1) {
+                case 1: cout << "Ace and "; 
+                    break;
+                case 11: cout << "Jack and "; 
+                    break;
+                case 12: cout << "Queen and ";
+                    break;
+                case 13: cout << "King and "; 
+                    break;
+                default: cout << dealer_card1 << " and ";
+                    break;
+            }
+            switch (dealer_card2) 
+            {
+                case 1: cout << "Ace"; 
+                    break;
+                case 11: cout << "Jack"; 
+                    break;
+                case 12: cout << "Queen"; 
+                    break;
+                case 13: cout << "King"; 
+                    break;
+                default: cout << dealer_card2;
+                    break;
+            }
+
+            cout << "\n"<< "You have: ";
+            switch (player_card1){
+                case 1: cout << "Ace and "; 
+                break;
+                case 11: cout << "Jack and "; 
+                    break;
+                case 12: cout << "Queen and "; 
+                    break;
+                case 13: cout << "King and "; 
+                    break;
+                default: cout << player_card1 << " and "; 
+                    break;
+            }
+            switch (player_card2)
+            {
+                case 1: cout << "Ace"; 
+                    break;
+                case 11: cout << "Jack"; 
+                    break;
+                case 12: cout << "Queen"; 
+                    break;
+                case 13: cout << "King"; 
+                    break;
+                default: cout << player_card2;
+                    break;
+            }
+
+            int dealer_total = dealer_card1 + dealer_card2;
+            int player_total = player_card1 + player_card2;
+
+            if ((player_card1 == 1) && (player_card2 >= 10 && player_card2 <= 13))
+            {
+                cout << "Blackjack! You Won $ " << bet*1.5 << "!!" << endl;
+                breakLine();
+                PrintDashes();
+                breakLine();
+                PrintWinImage();
+                breakLine();
+                money+=bet; 
+            }else 
+            {
+                if ((player_card2 == 1) && (player_card1 >= 10 && player_card1 <= 13))
+                {
+                    cout << "Blackjack! You Won $ " << bet*1.5 << "!!" << endl;
+                    breakLine();
+                    PrintDashes();
+                    breakLine();
+                    PrintWinImage();
+                    breakLine();
+                    money+=bet;
+                }
+                else
+                { 
+                    if (player_total > dealer_total)
+                    {
+                        cout << "\n" << "You Won $" << bet << "!!" << endl;
+                        breakLine();
+                        PrintDashes();
+                        breakLine();
+                        PrintWinImage();
+                        breakLine();
+                        money+=bet;
+                    }
+                    else
+                    { 
+                         /*
+                        Cheerful Whistling by Free Music | https://soundcloud.com/fm_freemusic
+                        Music promoted by https://www.free-stock-music.com
+                        Creative Commons Attribution 3.0 Unported License
+                        https://creativecommons.org/licenses/by/3.0/deed.en_US
+                        */
+                        PlaySound("Music/funny.wav", NULL, SND_FILENAME | SND_ASYNC);
+                        cout << "\n" << "You lost $" << bet<< endl;
+                        breakLine();
+                        PrintDashes();
+                        breakLine();
+                        PrintLostImage();
+                        breakLine();
+                        money-=bet;	
+                    }
+                }
+            }
+            breakLine();
+            breakLine();
+            PrintLines();
+            breakLine();
+            cout<<"Your balance is "<<money<<"$"<<endl;
+            if (money>0)
+            {
+                cout<<"Do you want to play again ? t/n: ";
+                cin >> answer;
+                if(answer=="t")
+                {
+                    PlaySound(NULL, NULL, SND_ASYNC);
+                    PlaySound("Music/blackjack.wav", NULL, SND_FILENAME | SND_ASYNC);
+                    system("cls");
+                    PrintTakeMyMoney();
+                    Sleep(3000);
+                    dealer_card1 = rand() % 13 + 1; 
+	                dealer_card2 = rand() % 13 + 1;
+	                player_card1 = rand() % 13 + 1;
+	                player_card2 = rand() % 13 + 1;
+                    system("cls");
+                }
+                else
+                {
+                    system("cls");
+                    PrintAvailableGames(money);
+                    short choosedGame = ChooseGame();
+                    if (choosedGame == 1) 
+                    {
+                        money = playBlackjack(money);
+                    } else if (choosedGame == 2) 
+                    {
+                        money = playRuletka(money);
+                    } else if (choosedGame == 3) 
+                    {
+                        money = PlayJednorekiBandyta(money);
+                    }
+                }
+            }   
+            else
+            {
+                cout<<"SORRY BUT YOU HAVE NO FUNDS TO PLAY :("<<endl;
+                cout<<" "<<endl;
+                PrintScream();
+
+            }
+        }while(answer !="n" && money>0);
+    }
+    else
+    {
+        cout<<"SORRY BUT YOU HAVE NO FUNDS TO PLAY :("<<endl;
+        cout<<" "<<endl;
+        PrintScream();
+    }
+return money;
+}
+
 int main() {
     PlaySound("Music/action.wav", NULL, SND_FILENAME | SND_ASYNC);
     double money = 10000;
@@ -282,6 +487,7 @@ int main() {
     short choosedGame = ChooseGame();
 
     if (choosedGame == 1) {
+        money = playBlackjack(money);
     } else if (choosedGame == 2) {
         money = playRuletka(money);
     } else if (choosedGame == 3) {
