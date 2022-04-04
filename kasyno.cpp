@@ -458,6 +458,7 @@ return money;
 }
 
 int main() {
+    system("cls");
     PlaySound("Music/action.wav", NULL, SND_FILENAME | SND_ASYNC);
     double money = 10000;
 
