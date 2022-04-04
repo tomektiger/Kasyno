@@ -1,6 +1,6 @@
 
-# Created by https://www.toptal.com/developers/gitignore/api/clion,c++,visualstudiocode
-# Edit at https://www.toptal.com/developers/gitignore?templates=clion,c++,visualstudiocode
+# Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,c++,clion
+# Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,c++,clion
 
 ### C++ ###
 # Prerequisites
@@ -166,4 +166,4 @@ fabric.properties
 
 # Support for Project snippet scope
 
-# End of https://www.toptal.com/developers/gitignore/api/clion,c++,visualstudiocode
+# End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,c++,clion
