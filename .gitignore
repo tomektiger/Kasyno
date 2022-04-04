@@ -136,6 +136,7 @@ fabric.properties
 .idea/**/markdown-navigator.xml
 .idea/**/markdown-navigator-enh.xml
 .idea/**/markdown-navigator/
+vscode/*
 .idea/*
 .vscode/*
 
