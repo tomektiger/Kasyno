@@ -3,7 +3,9 @@
 #include "Methods/GameChoice.cpp"
 #include "Methods/PlayerCreation.cpp"
 #include "Methods/TextPictures.cpp"
-#include "Methods/BandytaMethods.cpp"
+#include "Games/Bandyta/BandytaMethods.cpp"
+#include "Games/Roulette/RouletteMethods.cpp"
+#include "Games/Blackjack/BlackjackMethods.cpp"
 #include "Methods/AdditionalMethods.cpp"
 #include <ctime>
 #include <conio.h>
