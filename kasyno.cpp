@@ -605,7 +605,8 @@ int main()
 {
     system("cls");
     PlaySound("Music/action.wav", NULL, SND_FILENAME | SND_ASYNC);
-    double money = 10000;
+    srand(time(0));
+    double money = rand() % 1000 + 1;
 
     breakLine();
     CasinoPicture();

@@ -81,11 +81,11 @@ string CreatePlayer()
             cout << "How old are you ?: ";
             cin >> age;
         }
-        if (age < 0)
+        if (age < 0 || age == 0)
         {
             cout << "Please provide correct age" << endl;
         }
-        else if (age < 18 && age > 0)
+        else if (age < 18 && age > 0 || age == 0)
         {
             PrintFunny();
             cout << "" << endl;
@@ -95,8 +95,9 @@ string CreatePlayer()
         else
         {
             cout << "Welcome and have fun :)" << endl;
+            break;
         }
-    } while (cin.fail());
+    } while (true);
 
     return name;
 }

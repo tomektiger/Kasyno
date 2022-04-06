@@ -239,6 +239,7 @@ void PrintScream()
     cout << "     █▄▄  ▀             ▄█▀        " << endl;
     cout << "       ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀          " << endl;
     cout << "                                   " << endl;
+    exit(0);
 }
 
 void PrintResultsText()
